@@ -23,7 +23,6 @@ export async function createTask(data: FormData) {
 export async function getTasks() {
   try {
     const tasks = await db.select().from(todoSchema);
-    if (tasks.length === 0) throw new Error("No tasks found");
     return tasks;
   } catch (err) {
     console.log(err);
