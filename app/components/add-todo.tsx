@@ -2,30 +2,30 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createTask } from "../actions";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AddTodo() {
-  const [pending, setPending] = useState(false);
+  const [pending, startTansition] = useTransition();
   const { toast } = useToast();
 
   async function handleSubmit(formData: FormData) {
-    setPending(true);
-    const result = await createTask(formData);
+    startTansition(async () => {
+      const result = await createTask(formData);
 
-    if (result.success) {
-      toast({
-        title: "SUCCESS",
-        description: "Task Added Successfully",
-      });
-    } else {
-      toast({
-        title: "Error",
-        description: "Some Error Occurred",
-        variant: "destructive",
-      });
-    }
-    setPending(false);
+      if (result.success) {
+        toast({
+          title: "SUCCESS",
+          description: "Task Added Successfully",
+        });
+      } else {
+        toast({
+          title: "ERROR",
+          description: "Some Error Occurred",
+          variant: "destructive",
+        });
+      }
+    });
   }
 
   return (

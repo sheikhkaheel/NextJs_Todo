@@ -1,6 +1,6 @@
 "use client";
-import { CircleX } from "lucide-react";
-import { deleteTask } from "../actions";
+
+import DeleteTodo from "./delete-todo";
 import EditTodo from "./edit-todo";
 
 export default function Todos({
@@ -14,11 +14,8 @@ export default function Todos({
         allTasks.map((todo, index) => (
           <div key={todo.id} className="flex gap-3">
             {index + 1}: <span>{todo.task}</span>
-            <CircleX
-              className="py-1 bg-black rounded-lg text-gray-400"
-              onClick={() => deleteTask(todo.id)}
-            ></CircleX>
             <EditTodo id={todo.id} task={todo.task} />
+            <DeleteTodo id={todo.id} />
           </div>
         ))
       ) : (
