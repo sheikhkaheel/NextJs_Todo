@@ -56,7 +56,7 @@ export default function EditTodo({ id, task }: { id: string; task: string }) {
           <Button
             disabled={pending}
             onClick={async () => {
-              action;
+              action();
               setIsOpen(!isOpen);
             }}
           >
