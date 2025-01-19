@@ -1,5 +1,3 @@
-"use server";
-
 import { getTasks } from "./actions";
 import { unstable_cache } from "next/cache";
 import Todos from "./components/list-of-todo";
