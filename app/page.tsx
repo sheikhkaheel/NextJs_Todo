@@ -21,7 +21,7 @@ export default async function Home() {
         <AddTodo />
       </div>
       <h1 className="mb-4 font-semibold text-3xl">List of Todo</h1>
-      <Todos allTasks={allTasks} />
+      {/* <Todos allTasks={allTasks} /> */}
     </div>
   );
 }
