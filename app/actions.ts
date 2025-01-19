@@ -7,13 +7,15 @@ import { revalidateTag } from "next/cache";
 
 export async function createTask(data: FormData) {
   try {
-    if(!data) throw new Error('Provide a Todo');
+    if (!data) throw new Error("Provide a Todo");
     const task = data.get("task")!.toString();
-      const newTask = await db
-        .insert(todoSchema)
-        .values({ task })
-        .returning({ task: todoSchema.task });
+    const newTask = await db
+      .insert(todoSchema)
+      .values({ task })
+      .returning({ task: todoSchema.task });
     revalidateTag("task");
+
+    return { success: true };
   } catch (err) {
     console.log(err);
     throw new Error(`Interal Server Error: ${err}`);
@@ -50,7 +52,7 @@ export async function editTask(data: { id: string; task: string }) {
 
     revalidateTag("task");
 
-    return { success: true }
+    return { success: true };
   } catch (err) {
     console.log(err);
     throw new Error(`Interal Server Error: ${err}`);
