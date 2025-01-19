@@ -9,6 +9,7 @@ export async function createTask(data: FormData) {
   try {
     if (!data) throw new Error("Provide a Todo");
     const task = data.get("task")!.toString();
+    if (task === "") return { success: false };
     const newTask = await db
       .insert(todoSchema)
       .values({ task })
