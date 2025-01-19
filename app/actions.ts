@@ -7,13 +7,12 @@ import { revalidateTag } from "next/cache";
 
 export async function createTask(data: FormData) {
   try {
-    const task = data.get("task")?.toString();
-    if (task) {
+    if(!data) throw new Error('Provide a Todo');
+    const task = data.get("task")!.toString();
       const newTask = await db
         .insert(todoSchema)
         .values({ task })
         .returning({ task: todoSchema.task });
-    }
     revalidateTag("task");
   } catch (err) {
     console.log(err);
@@ -24,7 +23,8 @@ export async function createTask(data: FormData) {
 export async function getTasks() {
   try {
     const tasks = await db.select().from(todoSchema);
-    return tasks;
+    if(!tasks) throw new Error("You don't have any todo") 
+    return tasks ?? null;
   } catch (err) {
     console.log(err);
     throw new Error("Interal Server Error");
