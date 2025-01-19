@@ -15,7 +15,7 @@ export default function AddTodo() {
     <form action={action}>
       <label className="text-3xl font-semibold mr-4">Create a Todo</label>
       <Input
-        className="my-2  border-none placeholder:text-gray-700 bg-white"
+        className="my-2 border lg:w-[20rem] placeholder:text-gray-700 bg-white"
         type="text"
         placeholder="Task Name..."
         name="task"

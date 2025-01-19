@@ -14,7 +14,7 @@ export default async function Home() {
   const allTasks = await tasks();
 
   return (
-    <div className="p-8 bg-neutral-700 h-screen w-full m-0">
+    <div className="flex flex-col items-center justify-center h-screen w-full m-0">
       <div className="mb-8">
         <AddTodo />
       </div>
