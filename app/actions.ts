@@ -4,7 +4,7 @@ import { db } from "@/server/db";
 import { todoSchema } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import { validateHeaderName } from "http";
-import { revalidateTag } from "next/cache";
+// import { revalidateTag } from "next/cache";
 import Todos from "./components/list-of-todo";
 
 export async function createTask(data: FormData) {
@@ -16,7 +16,7 @@ export async function createTask(data: FormData) {
         .values({ task })
         .returning({ task: todoSchema.task });
     }
-    revalidateTag("task");
+    // revalidateTag("task");
   } catch (err) {
     console.log(err);
     throw new Error("Interal Server Error");
@@ -37,7 +37,7 @@ export async function deleteTask(id: string) {
   try {
     if (!id) throw new Error("Id does not exists.");
     const task = await db.delete(todoSchema).where(eq(todoSchema.id, id));
-    revalidateTag("task");
+    // revalidateTag("task");
   } catch (err) {
     console.log(err);
     throw new Error("Interal Server Error");
@@ -51,7 +51,7 @@ export async function editTask(data: { id: string; task: string }) {
       .set({ id: data.id, task: data.task })
       .where(eq(todoSchema.id, data.id));
 
-    revalidateTag("task");
+    // revalidateTag("task");
   } catch (err) {
     console.log(err);
     throw new Error("Interal Server Error");

@@ -13,7 +13,7 @@ import AddTodo from "./components/add-todo";
 export default async function Home() {
 
   // const allTasks = await tasks();
-  // const allTasks = await getTasks();
+  const allTasks = await getTasks();
 
   return (
     <div className="p-8 bg-neutral-700 h-screen w-full m-0">
