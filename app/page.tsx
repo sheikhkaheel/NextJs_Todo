@@ -5,12 +5,14 @@ import { unstable_cache } from "next/cache";
 import Todos from "./components/list-of-todo";
 import AddTodo from "./components/add-todo";
 
+// Cache tasks on the server side
 const tasks = unstable_cache(async () => await getTasks(), ["task"], {
   revalidate: 3600,
   tags: ["task"],
 });
 
 export default async function Home() {
+  // Fetch tasks using the cached server-side function
   const allTasks = await tasks();
 
   return (
