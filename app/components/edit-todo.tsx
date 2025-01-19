@@ -57,7 +57,7 @@ export default function EditTodo({ id, task }: { id: string; task: string }) {
               setIsLoading(true)
               const message = await editTask({ id, task: todo });
               setIsLoading(!message.success)
-              setIsOpen(!isOpen);
+              // setIsOpen(!isOpen);
             }}
           >
             {!isLoading ? "Save" : "Saving..."}
