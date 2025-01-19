@@ -16,18 +16,18 @@ export async function createTask(data: FormData) {
     revalidateTag("task");
   } catch (err) {
     console.log(err);
-    throw new Error("Interal Server Error");
+    throw new Error(`Interal Server Error: ${err}`);
   }
 }
 
 export async function getTasks() {
   try {
     const tasks = await db.select().from(todoSchema);
-    if(!tasks) throw new Error("You don't have any todo") 
-    return tasks ?? null;
+    if (tasks.length === 0) throw new Error("No tasks found");
+    return tasks;
   } catch (err) {
     console.log(err);
-    throw new Error("Interal Server Error");
+    throw new Error(`Interal Server Error: ${err}`);
   }
 }
 
@@ -38,7 +38,7 @@ export async function deleteTask(id: string) {
     revalidateTag("task");
   } catch (err) {
     console.log(err);
-    throw new Error("Interal Server Error");
+    throw new Error(`Interal Server Error: ${err}`);
   }
 }
 
@@ -52,6 +52,6 @@ export async function editTask(data: { id: string; task: string }) {
     revalidateTag("task");
   } catch (err) {
     console.log(err);
-    throw new Error("Interal Server Error");
+    throw new Error(`Interal Server Error: ${err}`);
   }
 }
