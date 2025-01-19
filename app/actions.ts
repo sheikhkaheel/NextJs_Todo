@@ -50,6 +50,8 @@ export async function editTask(data: { id: string; task: string }) {
       .where(eq(todoSchema.id, data.id));
 
     revalidateTag("task");
+
+    return { success: true }
   } catch (err) {
     console.log(err);
     throw new Error(`Interal Server Error: ${err}`);

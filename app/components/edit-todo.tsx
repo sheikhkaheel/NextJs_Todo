@@ -17,12 +17,10 @@ import { ChangeEvent, useActionState, useState } from "react";
 import { editTask } from "../actions";
 
 export default function EditTodo({ id, task }: { id: string; task: string }) {
-  const [state, action, pending] = useActionState(async () => {
-    await editTask({ id, task: todo });
-  }, undefined);
 
   const [todo, setTodo] = useState<string>(task);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading,setIsLoading] = useState(false);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -54,13 +52,15 @@ export default function EditTodo({ id, task }: { id: string; task: string }) {
         </div>
         <DialogFooter>
           <Button
-            disabled={pending}
+            disabled={isLoading}
             onClick={async () => {
-              action();
+              setIsLoading(true)
+              const message = await editTask({ id, task: todo });
+              setIsLoading(!message.success)
               setIsOpen(!isOpen);
             }}
           >
-            {!pending ? "Save" : "Saving..."}
+            {!isLoading ? "Save" : "Saving..."}
           </Button>
         </DialogFooter>
       </DialogContent>
