@@ -9,7 +9,7 @@ export default function Todos({
   allTasks: { id: string; task: string }[];
 }) {
   return (
-    <div className="flex flex-col font-mono">
+    <div className="flex flex-col font-mono px-8 lg:px-0">
       {allTasks.length ? (
         allTasks.map((todo, index) => (
           <div key={todo.id} className="flex gap-3">
